@@ -32,7 +32,7 @@ let webcontainerInstance: WebContainer;
 window.addEventListener('load', async () => {
   textareaEl.value = files['index.js'].file.contents;
 
-  textareaEl.addEventListener('input', (e: Event) => {
+  textareaEl.addEventListener('input', (e: any) => {
     writeIndexJS(e.currentTarget?.value);
   });
 
@@ -50,7 +50,8 @@ window.addEventListener('load', async () => {
     throw new Error('Failed to install dependencies');
   }
   // Wait for `server-ready` event
-  webcontainerInstance.on('server-ready', (port, url) => {
+  webcontainerInstance.on('server-ready', (port: number, url: string) => {
+    console.log('Server is ready', port, url);
     iframeEl.src = url;
   });
 
